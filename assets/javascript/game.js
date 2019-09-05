@@ -1,5 +1,6 @@
 var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i","j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-var availableWords = ["ankle"]
+var availableWords = ["ankle"];
+var currentWord = ["_" , "_" , "_","_", "_"]
 var attemptsRemaining = 10;
 var wins = 0;
 
@@ -15,15 +16,13 @@ var winsText = document.getElementById("wins");
 
 
 document.onkeyup = function(event) {
-    var wordChosen = availableWords[Math.floor(Math.random() * availableWords.length)];
-    for (var i = 0; i < availableWords.length; i++){
-        var letterGuessed = event.key; //key user presses
-         
-        
+    var wordChosen = availableWords[Math.floor(Math.random() * availableWords.length)]; //gives random word
+    var letterGuessed = event.key; //key user presses
 
-        if (availableWords[0] === "a" || availableWords[1] === "n"){ 
-            console.log(animal + " a or n")
-        }
+    var letter = availableWords[0].charAt[0]  ///Gives us a!! 
+        if (wordChosen[0] === letterGuessed){ 
+            currentWordText.textContent = (letterGuessed + "_ _ _ _");
+        
     }
 }
 
