@@ -16,23 +16,29 @@ var winsText = document.getElementById("wins");
 
 document.onkeyup = function(event) {
     var letterGuessed = event.key; //key user presses
-    var wordChoice = letterChoice[Math.floor(Math.random() * letterChoice.length)];
-    // for (var i = 0; i < wordChoice.length;){
+    var wordChosen = wordChoice[Math.floor(Math.random() * wordChoice.length)];
+    console.log(wordChosen);
     //     var letter = wordChoice[i]
-        if (letterChoice.includes(letterGuessed)){
-            if ((letterGuessed === "a") ||
-                (letterGuessed === "n") ||
-                (letterGuessed === "k") ||
-                (letterGuessed === "l") ||
-                (letterGuessed === "e")) {
-                alert("turtle") //wrong but will fix later
-                }
+    // for (var i = 0; i < wordChoice.length; i++){
+    //     if (letterChoice.includes(letterGuessed)){
+    //         if (letterGuessed === "a") {
+    //             currentWordText.textContent = "Current Word: " + wordChoice[0];
+    //         }
+    //      }   
+    //     }
+
+                // (letterGuessed === "n") ||
+                // (letterGuessed === "k") ||
+                // (letterGuessed === "l") ||
+                // (letterGuessed === "e")) {
+             //wrong but will fix later
+                
 
         // } else {
         //     alert("booo")
         // }        
 
-        }
+
         // directionsText.textContent = "";
         // currentWordText.textContent = "Current Word: " + wordChoice;
         // letterGuessedText.textContent = "Letters guessed: " + letterGuessed;
