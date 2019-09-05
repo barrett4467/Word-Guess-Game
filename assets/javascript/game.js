@@ -1,5 +1,5 @@
-var letterChoice = ["a", "b", "c", "d", "e", "f", "g", "h", "i","j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-var wordChoice = ["ankle", "knees", "joint"]
+var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i","j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+var availableWords = ["ankle"]
 var attemptsRemaining = 10;
 var wins = 0;
 
@@ -15,14 +15,31 @@ var winsText = document.getElementById("wins");
 
 
 document.onkeyup = function(event) {
-    var letterGuessed = event.key; //key user presses
-    var wordChosen = wordChoice[Math.floor(Math.random() * wordChoice.length)];
-    console.log(wordChosen);
-    //     var letter = wordChoice[i]
-    // for (var i = 0; i < wordChoice.length; i++){
-    //     if (letterChoice.includes(letterGuessed)){
-    //         if (letterGuessed === "a") {
-    //             currentWordText.textContent = "Current Word: " + wordChoice[0];
+    var wordChosen = availableWords[Math.floor(Math.random() * availableWords.length)];
+    for (var i = 0; i < availableWords.length; i++){
+        var letterGuessed = event.key; //key user presses
+         
+        
+
+        if (availableWords[0] === "a" || availableWords[1] === "n"){ 
+            console.log(animal + " a or n")
+        }
+    }
+}
+
+
+
+
+
+    //     if (letterGuessed.includes(alphabet)){ //starts game
+    //         if (letterGuessed === availableWords[i]) {
+    //             currentWordText.textContent = "Current Word: " + wordChosen[i]; {
+    //                 document.write("oh snap")
+    //             }} 
+    //         } console.log(availableWords[i]);
+    // }
+
+    //             
     //         }
     //      }   
     //     }
@@ -44,4 +61,6 @@ document.onkeyup = function(event) {
         // letterGuessedText.textContent = "Letters guessed: " + letterGuessed;
         // attemptsRemainingText.textContent = "Attempts remaining " + attemptsRemaining;
         // winsText.textContent = "Wins " + wins;
-}
+
+
+        //I don't know how much of this is a fever dream...
