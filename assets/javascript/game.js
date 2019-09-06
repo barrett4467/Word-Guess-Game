@@ -3,6 +3,8 @@ var availableWords = ["ankle"];
 var currentWord = [];
 var attemptsRemaining = 10;
 var wins = 0;
+var lettersGuessed = 0;
+
 
 
 
@@ -13,31 +15,48 @@ var currentWordText = document.getElementById("current-word");
 // var letterGuessedText = document.getElementById("letter-guessed");
 var attemptsRemainingText = document.getElementById("attempts-remaining");
 var winsText = document.getElementById("wins");
-
+var directionsText = document.getElementById("directions");
+var lettersGuessedText = document.getElementById("letters-guessed");
 
 document.onkeyup = function(event) {
     var wordChosen = availableWords[Math.floor(Math.random() * availableWords.length)]; //gives random word
-    var letterGuessed = event.key; //key user presses
+    var lettersGuessed = event.key; //key user presses
     var pastGuesses = [];
-
+    directionsText.textContent = ""
     // var letter = availableWords[0].charAt[0]  ///Gives us first letter!! 
 
     var letter = wordChosen[0];
+    // for (var i = 0 ; i < availableWords.length; i++)
 
-    if (wordChosen[0] === letterGuessed) { 
-        currentWordText.textContent = (letterGuessed);
-        console.log(letterGuessed);
+    // if (lettersGuessed.includes(alphabet)){
 
-        pastGuesses.push(letterGuessed);
-        console.log(pastGuesses);
-
-    } else if ((wordChosen[0] != letterGuessed) && (wordChosen[1] === letterGuessed)){
-                currentWordText.textContent = (pastGuesses[1] + letterGuessed);
-
-                pastGuesses.push(letterGuessed);
-                console.log(pastGuesses)
+        
+        if ((wordChosen[0] === lettersGuessed) || (wordChosen[1] === lettersGuessed) || (wordChosen[2] === lettersGuessed) || (wordChosen[3] === lettersGuessed) || (wordChosen[4] === lettersGuessed)) { 
+            // function letterOrder () {
+            //     if (wordChosen[0] === lettersGuessed) {
+            //         console.log(lettersGuessed + " _ _ _ _");
+            //     }
+            // }
+            // letterOrder(); 
+            currentWordText.textContent = (lettersGuessed);
+            console.log(lettersGuessed);
+            
+            pastGuesses.push(lettersGuessed);
+            console.log(pastGuesses);
+    
+            if (wordChosen[0] === lettersGuessed){
+                
             }
+    
+        } else if ((wordChosen[0] != lettersGuessed) && (wordChosen[1] === lettersGuessed)){
+                    currentWordText.textContent = ("Current Word: " + pastGuesses[1] + lettersGuessed);
+    
+                    pastGuesses.push(lettersGuessed);
+                    console.log(pastGuesses)
+                }
     }
+
+    // }
 
         //    else if ((wordChosen[0] === letterGuessed) && (wordChosen[1] === letterGuessed)){
         //        currentWordText.textContent = (letterGuessed + "_ _ _");
@@ -152,8 +171,8 @@ document.onkeyup = function(event) {
         // }        
 
 
-        // directionsText.textContent = "";
-        // currentWordText.textContent = "Current Word: " + wordChoice;
-        // letterGuessedText.textContent = "Letters guessed: " + letterGuessed;
-        // attemptsRemainingText.textContent = "Attempts remaining " + attemptsRemaining;
-        // winsText.textContent = "Wins " + wins;
+        directionsText.textContent = "Press any key to get started!";
+        currentWordText.textContent = "Current Word: ";
+        lettersGuessedText.textContent = "Letters guessed: " + lettersGuessed;
+        attemptsRemainingText.textContent = "Attempts remaining " + attemptsRemaining;
+        winsText.textContent = "Wins: " + wins;
