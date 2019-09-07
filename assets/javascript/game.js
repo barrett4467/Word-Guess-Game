@@ -29,19 +29,24 @@ for (i = 0; i < currentWord.length; i++) {
 document.onkeyup = function(event) {
     var letter = event.key; //key user presses
     var lettersGuessed = letter.toLowerCase();
-    directionsText.textContent = ""
-    document.getElementById("current-word").textContent = wordBlanks.join(" ");
+    directionsText.textContent = "" //takes directions away 
 
-    
+    var lettersToGuess = wordBlanks.pop(); //decreases the blanks as correct letters are guessed
+
+    console.log(lettersToGuess);
+    document.getElementById("current-word").innerHTML = ("Current Word: " + lettersToGuess);
+
+    console.log(wordBlanks);
     console.log("You have typed: " + lettersGuessed);
-    if (alphabet.includes(lettersGuessed)){
-        function lettersRemaining (){
-            var toGuess = 0;
+
+    if (alphabet.includes(lettersGuessed)){ //starts game only if letter is pressed 
+        function lettersRemaining (){ //should give us underscores for the letters not guessed
+            var inWord = 0;
             for (i in word) {
                 if (word[i] === "__") {
-                    toGuess++;
+                    inWord++;
                 }
-                return toGuess;
+                return inWord;
             }
         }
         
@@ -57,17 +62,18 @@ document.onkeyup = function(event) {
         var positions = letterInWord(lettersGuessed);
 
         if (positions.length) {
-            var lettersToGuess = wordBlanks - 1;
             console.log("User has pressed a letter from word: " + letter);
 
             for (i = 0 ; i < positions.length; i++) {
                 word[positions[i]] = lettersGuessed;
             }
-            document.getElementById("current-word").textContent = (word);
+            document.getElementById("current-word").textContent = ("Current word: " + word);
         }
 
         if (lettersToGuess === 0){
             resetLettersGuessed;
+            wins++;
+            document.getElementById("wins").textContent = wins;
         }
 
     } else {
