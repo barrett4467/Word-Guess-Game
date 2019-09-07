@@ -1,9 +1,11 @@
 var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i","j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-var availableWords = ["ankle"];
-var currentWord = [];
+var availableWords = ["ankle" , "skeleton", "teeth", "clavicle", "skull", "patella", "ulna"];
 var attemptsRemaining = 10;
 var wins = 0;
-var lettersGuessed = 0;
+var word = [];
+var currentWord = availableWords[Math.floor(Math.random() * availableWords.length)]; //gives random word
+var wordBlanks = []; 
+var resetLettersGuessed = " "
 
 
 
@@ -19,40 +21,65 @@ var directionsText = document.getElementById("directions");
 var lettersGuessedText = document.getElementById("letters-guessed");
 
 
-document.onkeyup = function(event) {
-    var wordChosen = availableWords[Math.floor(Math.random() * availableWords.length)]; //gives random word
-    var lettersGuessed = event.key; //key user presses
-    directionsText.textContent = ""
-    var pastGuesses = [];
-    
-    for (var i = 0 ; i < availableWords.length; i++){ //should loop through word length
-        if (wordChosen.includes("lettersGuessed")) { 
-            var letter = wordChosen[i];
-            pastGuesses.push(lettersGuessed); //stores previous guesses 
-            currentWordText.textContent = ("Current Word: " + lettersGuessed + " _ _ _ _");
+for (i = 0; i < currentWord.length; i++) {
+    console.log(currentWord);
+    wordBlanks.push("__");
+}
 
-        } else if ((wordChosen[0] != lettersGuessed) && (wordChosen[1] === lettersGuessed)){
-            currentWordText.textContent = ("Current Word: " + " _ " + lettersGuessed + " _ _ _");
-            pastGuesses.push(lettersGuessed);
-        } else if ((wordChosen[0] != lettersGuessed) && (wordChosen[1] != lettersGuessed) && (wordChosen[2] === lettersGuessed)){
-            currentWordText.textContent = ("Current Word: " + " _  _ " + lettersGuessed + " _ _ ");
-            pastGuesses.push(lettersGuessed);
-        } else if ((wordChosen[0] != lettersGuessed) && (wordChosen[1] != lettersGuessed) && (wordChosen[2] != lettersGuessed) && (wordChosen[3] === lettersGuessed)){
-            currentWordText.textContent = ("Current Word: " + " _  _  _ " + lettersGuessed + " _ ");
-            pastGuesses.push(lettersGuessed);
-        } else if ((wordChosen[0] != lettersGuessed) && (wordChosen[1] != lettersGuessed) && (wordChosen[2] != lettersGuessed) && (wordChosen[3] != lettersGuessed) && (wordChosen[4] === lettersGuessed)){
-            currentWordText.textContent = ("Current Word: " + " _  _  _  _ " + lettersGuessed);
-            pastGuesses.push(lettersGuessed);
-        } else if ((wordChosen[0] === lettersGuessed) && (wordChosen[1] === lettersGuessed)){
-            currentWordText.textContent = ("Current Word: " + pastGuesses + lettersGuessed + " _ _ _");
-            pastGuesses.push(lettersGuessed);
-     
-    }
-            
-            
-            
+document.onkeyup = function(event) {
+    var letter = event.key; //key user presses
+    var lettersGuessed = letter.toLowerCase();
+    directionsText.textContent = ""
+    document.getElementById("current-word").textContent = wordBlanks.join(" ");
+
+    
+    console.log("You have typed: " + lettersGuessed);
+    if (alphabet.includes(lettersGuessed)){
+        
+        function letterInWord(letter) { 
+            var positions = new Array();
+            for (i = 0 ; i < currentWord.length; i++) {
+                if (currentWord[i] === letter)
+                positions.push(i);
+            }
+            return positions;
         }
+        
+        var positions = letterInWord(lettersGuessed);
+
+    } else {
+        return alert("Invalid key entered. Please try again!");
     }
+}
+
+
+    // for (var i = 0 ; i < availableWords.length; i++){ //should loop through word length
+    //     if (wordChosen.includes("lettersGuessed")) { 
+    //         var wordLength = currentWordText.length;
+
+    //         currentWordText.textContent = ("Current Word: " + wordChosen[i] + (wordLength - 1));
+
+        //     var letter = wordChosen[i];
+        //     pastGuesses.push(lettersGuessed); //stores previous guesses 
+        //     currentWordText.textContent = ("Current Word: " + lettersGuessed + " _ _ _ _");
+
+        // } else if ((wordChosen[0] != lettersGuessed) && (wordChosen[1] === lettersGuessed)){
+        //     currentWordText.textContent = ("Current Word: " + " _ " + lettersGuessed + " _ _ _");
+        //     pastGuesses.push(lettersGuessed);
+        // } else if ((wordChosen[0] != lettersGuessed) && (wordChosen[1] != lettersGuessed) && (wordChosen[2] === lettersGuessed)){
+        //     currentWordText.textContent = ("Current Word: " + " _  _ " + lettersGuessed + " _ _ ");
+        //     pastGuesses.push(lettersGuessed);
+        // } else if ((wordChosen[0] != lettersGuessed) && (wordChosen[1] != lettersGuessed) && (wordChosen[2] != lettersGuessed) && (wordChosen[3] === lettersGuessed)){
+        //     currentWordText.textContent = ("Current Word: " + " _  _  _ " + lettersGuessed + " _ ");
+        //     pastGuesses.push(lettersGuessed);
+        // } else if ((wordChosen[0] != lettersGuessed) && (wordChosen[1] != lettersGuessed) && (wordChosen[2] != lettersGuessed) && (wordChosen[3] != lettersGuessed) && (wordChosen[4] === lettersGuessed)){
+        //     currentWordText.textContent = ("Current Word: " + " _  _  _  _ " + lettersGuessed);
+        //     pastGuesses.push(lettersGuessed);
+        // } else if ((wordChosen[0] === lettersGuessed) && (wordChosen[1] === lettersGuessed)){
+        //     currentWordText.textContent = ("Current Word: " + pastGuesses + lettersGuessed + " _ _ _");
+        //     pastGuesses.push(lettersGuessed);
+     
+
 
         // || (wordChosen[1] === lettersGuessed) || (wordChosen[2] === lettersGuessed) || (wordChosen[3] === lettersGuessed) || (wordChosen[4] === lettersGuessed)
 
@@ -69,90 +96,7 @@ document.onkeyup = function(event) {
                 // }
                 
                 
-                // switch(keyPressed){ 
-                    //     case "a": 
-                    
-                    //         break;
-                    //     case "b":
-                    
-                    //         break;
-                    //     case "c":
-                    
-                    //         break;
-                    //     case "d":
-                    
-                    //         break;
-                    //     case "e": 
-                    
-                    //         break;
-    //     case "f":
-            
-    //         break;
-    //     case "g":
-            
-    //         break;
-    //     case "h":
-            
-    //         break;
-    //     case "i": 
-            
-    //         break;
-    //     case "j":
-            
-    //         break;
-    //     case "k":
-            
-    //         break;
-    //     case "l":
-
-    //         break;
-    //     case "m": 
-        
-    //         break;
-    //     case "n":
-            
-    //         break;
-    //     case "o":
-            
-    //         break;
-    //     case "p":
-            
-    //         break;
-    //     case "q": 
-            
-    //         break;
-    //     case "r":
-            
-    //         break;
-    //     case "s":
-            
-    //         break;
-    //     case "t":
-            
-    //         break;
-    //     case "u": 
-        
-    //         break;
-    //     case "v":
-            
-    //         break;
-    //     case "w":
-            
-    //         break;
-    //     case "x":
-            
-    //         break;
-    //     case "y": 
-            
-    //         break;
-    //     case "z":
-            
-    //         break;
-    //     default:
-    //        return alert("Invalid Key try again!");
-
-    // }
-
+          
 
 
 
@@ -178,6 +122,6 @@ document.onkeyup = function(event) {
 
         directionsText.textContent = "Press any key to get started!";
         currentWordText.textContent = "Current Word: ";
-        lettersGuessedText.textContent = "Letters guessed: " + lettersGuessed;
+        // lettersGuessedText.textContent = "Letters guessed: " + lettersGuessed;
         attemptsRemainingText.textContent = "Attempts remaining " + attemptsRemaining;
         winsText.textContent = "Wins: " + wins;
