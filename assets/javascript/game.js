@@ -35,6 +35,15 @@ document.onkeyup = function(event) {
     
     console.log("You have typed: " + lettersGuessed);
     if (alphabet.includes(lettersGuessed)){
+        function lettersRemaining (){
+            var toGuess = 0;
+            for (i in word) {
+                if (word[i] === "__") {
+                    toGuess++;
+                }
+                return toGuess;
+            }
+        }
         
         function letterInWord(letter) { 
             var positions = new Array();
@@ -46,6 +55,20 @@ document.onkeyup = function(event) {
         }
         
         var positions = letterInWord(lettersGuessed);
+
+        if (positions.length) {
+            var lettersToGuess = wordBlanks - 1;
+            console.log("User has pressed a letter from word: " + letter);
+
+            for (i = 0 ; i < positions.length; i++) {
+                word[positions[i]] = lettersGuessed;
+            }
+            document.getElementById("current-word").textContent = (word);
+        }
+
+        if (lettersToGuess === 0){
+            resetLettersGuessed;
+        }
 
     } else {
         return alert("Invalid key entered. Please try again!");
