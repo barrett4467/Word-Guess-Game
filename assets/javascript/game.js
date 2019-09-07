@@ -18,68 +18,73 @@ var winsText = document.getElementById("wins");
 var directionsText = document.getElementById("directions");
 var lettersGuessedText = document.getElementById("letters-guessed");
 
+
 document.onkeyup = function(event) {
     var wordChosen = availableWords[Math.floor(Math.random() * availableWords.length)]; //gives random word
     var lettersGuessed = event.key; //key user presses
-    var pastGuesses = [];
     directionsText.textContent = ""
-    // var letter = availableWords[0].charAt[0]  ///Gives us first letter!! 
-
-    var letter = wordChosen[0];
-    // for (var i = 0 ; i < availableWords.length; i++)
-
-    // if (lettersGuessed.includes(alphabet)){
-
-        
-        if ((wordChosen[0] === lettersGuessed) || (wordChosen[1] === lettersGuessed) || (wordChosen[2] === lettersGuessed) || (wordChosen[3] === lettersGuessed) || (wordChosen[4] === lettersGuessed)) { 
-            // function letterOrder () {
-            //     if (wordChosen[0] === lettersGuessed) {
-            //         console.log(lettersGuessed + " _ _ _ _");
-            //     }
-            // }
-            // letterOrder(); 
-            currentWordText.textContent = (lettersGuessed);
-            console.log(lettersGuessed);
-            
-            pastGuesses.push(lettersGuessed);
-            console.log(pastGuesses);
+    var pastGuesses = [];
     
-            if (wordChosen[0] === lettersGuessed){
-                
-            }
-    
+    for (var i = 0 ; i < availableWords.length; i++){ //should loop through word length
+        if (wordChosen.includes("lettersGuessed")) { 
+            var letter = wordChosen[i];
+            pastGuesses.push(lettersGuessed); //stores previous guesses 
+            currentWordText.textContent = ("Current Word: " + lettersGuessed + " _ _ _ _");
+
         } else if ((wordChosen[0] != lettersGuessed) && (wordChosen[1] === lettersGuessed)){
-                    currentWordText.textContent = ("Current Word: " + pastGuesses[1] + lettersGuessed);
-    
-                    pastGuesses.push(lettersGuessed);
-                    console.log(pastGuesses)
-                }
+            currentWordText.textContent = ("Current Word: " + " _ " + lettersGuessed + " _ _ _");
+            pastGuesses.push(lettersGuessed);
+        } else if ((wordChosen[0] != lettersGuessed) && (wordChosen[1] != lettersGuessed) && (wordChosen[2] === lettersGuessed)){
+            currentWordText.textContent = ("Current Word: " + " _  _ " + lettersGuessed + " _ _ ");
+            pastGuesses.push(lettersGuessed);
+        } else if ((wordChosen[0] != lettersGuessed) && (wordChosen[1] != lettersGuessed) && (wordChosen[2] != lettersGuessed) && (wordChosen[3] === lettersGuessed)){
+            currentWordText.textContent = ("Current Word: " + " _  _  _ " + lettersGuessed + " _ ");
+            pastGuesses.push(lettersGuessed);
+        } else if ((wordChosen[0] != lettersGuessed) && (wordChosen[1] != lettersGuessed) && (wordChosen[2] != lettersGuessed) && (wordChosen[3] != lettersGuessed) && (wordChosen[4] === lettersGuessed)){
+            currentWordText.textContent = ("Current Word: " + " _  _  _  _ " + lettersGuessed);
+            pastGuesses.push(lettersGuessed);
+        } else if ((wordChosen[0] === lettersGuessed) && (wordChosen[1] === lettersGuessed)){
+            currentWordText.textContent = ("Current Word: " + pastGuesses + lettersGuessed + " _ _ _");
+            pastGuesses.push(lettersGuessed);
+     
+    }
+            
+            
+            
+        }
     }
 
-    // }
+        // || (wordChosen[1] === lettersGuessed) || (wordChosen[2] === lettersGuessed) || (wordChosen[3] === lettersGuessed) || (wordChosen[4] === lettersGuessed)
 
-        //    else if ((wordChosen[0] === letterGuessed) && (wordChosen[1] === letterGuessed)){
-        //        currentWordText.textContent = (letterGuessed + "_ _ _");
-        //     }
-    // }
-
-
-    // switch(keyPressed){ 
-    //     case "a": 
+        // if (lettersGuessed.includes(alphabet)){
             
-    //         break;
-    //     case "b":
             
-    //         break;
-    //     case "c":
             
-    //         break;
-    //     case "d":
             
-    //         break;
-    //     case "e": 
+            // }
             
-    //         break;
+            //    else if ((wordChosen[0] === letterGuessed) && (wordChosen[1] === letterGuessed)){
+                //        currentWordText.textContent = (letterGuessed + "_ _ _");
+                //     }
+                // }
+                
+                
+                // switch(keyPressed){ 
+                    //     case "a": 
+                    
+                    //         break;
+                    //     case "b":
+                    
+                    //         break;
+                    //     case "c":
+                    
+                    //         break;
+                    //     case "d":
+                    
+                    //         break;
+                    //     case "e": 
+                    
+                    //         break;
     //     case "f":
             
     //         break;
