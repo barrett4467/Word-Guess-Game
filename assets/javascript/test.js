@@ -5,105 +5,81 @@ var wins = 0;
 var word = [];
 var currentWord = availableWords[Math.floor(Math.random() * availableWords.length)]; //gives random word
 var wordBlanks = []; 
-var pastGuesses = [];
-var lettersGuessed = " "; 
+var resetLettersGuessed = " "
+
 
 
 
 
 
 // var for ref to HTML
-var directionsText = document.getElementById("directions");
 var currentWordText = document.getElementById("current-word");
+// var letterGuessedText = document.getElementById("letter-guessed");
 var attemptsRemainingText = document.getElementById("attempts-remaining");
-var pastGuessesText = document.getElementById("past-guesses");
 var winsText = document.getElementById("wins");
-var lossesText = document.getElementById("losses");
+var directionsText = document.getElementById("directions");
+var lettersGuessedText = document.getElementById("letters-guessed");
 
-function empty(){
-    pastGuesses.length = 0;
-}
-
-function reset (){
-    alert("Next Round!!");
-    attemptsRemaining = 10;
-    document.getElementById("current-word").textContent = "";
-    empty();
-    currentWord = alphabet[Math.floor(Math.random() * alphabet.length)];
-}
 
 for (i = 0; i < currentWord.length; i++) {
     console.log(currentWord);
-    wordBlanks.push("__");  //this is what takes the letter count of each word and creates an underscore 
+    wordBlanks.push("__");
 }
-
 
 document.onkeyup = function(event) {
     var letter = event.key; //key user presses
-    var letterGuessed = letter.toLowerCase();
-
+    var lettersGuessed = letter.toLowerCase();
+    
     directionsText.textContent = "" //takes directions away 
-    
-    var letterToGuess = wordBlanks.pop(); //decreases the blanks as correct letters are guessed
 
-    console.log(letterToGuess.length);
-    
-    document.getElementById("current-word").innerHTML = ("Current Word: " + wordBlanks);
+    var lettersToGuess = wordBlanks.pop(); //decreases the blanks as correct letters are guessed
+
+    console.log(lettersToGuess);
+    document.getElementById("current-word").innerHTML = ("Current Word: " + lettersToGuess);
+
     console.log(wordBlanks);
+    console.log("You have typed: " + lettersGuessed);
 
-    console.log("You have typed: " + letterGuessed);
-    
-    
-    if (letterGuessed === "a" || letterGuessed === "b" || letterGuessed === "c" || letterGuessed === "d" || letterGuessed === "e" || letterGuessed === "f" || letterGuessed === "g" || letterGuessed === "h" || letterGuessed === "i" || letterGuessed === "j" || letterGuessed === "k" || letterGuessed === "l" || letterGuessed === "m" || letterGuessed === "n" || letterGuessed === "o" || letterGuessed === "p" || letterGuessed === "q" || letterGuessed === "r" || letterGuessed === "s" || letterGuessed === "t" || letterGuessed === "u" || letterGuessed === "v" || letterGuessed === "w" || letterGuessed === "x" || letterGuessed === "y" || letterGuessed ==="z"){ //starts game only if letter is pressed 
-
-        
-        // document.getElementById("current-word").textContent = wordBlanks; 
+    if (alphabet.includes(lettersGuessed)){ //starts game only if letter is pressed 
+        function lettersRemaining (){ //should give us underscores for the letters not guessed
+            var inWord = 0;
+            for (i in word) {
+                if (word[i] === "__") {
+                    inWord++;
+                }
+                return inWord;
+            }
+        }
         
         function letterInWord(letter) { 
             var positions = new Array();
             for (i = 0 ; i < currentWord.length; i++) {
-                if (currentWord[i] === letter){
-                    positions.push(i);
-                    console.log(positions);
-                }
+                if (currentWord[i] === letter)
+                positions.push(i);
             }
-            return positions + word;
-        }
-        
-        function lettersRemaining (){
-            var toGuess = 0;
-            for (i in word) {
-                if (word[i] === "__") {
-                    toGuess++;
-                }
-                return toGuess;
-            }
+            return positions;
         }
         
         var positions = letterInWord(lettersGuessed);
-        
+
         if (positions.length) {
-            console.log(positions.length);
-            // var lettersToGuess = wordBlanks - 1;
             console.log("User has pressed a letter from word: " + letter);
-            
+
             for (i = 0 ; i < positions.length; i++) {
                 word[positions[i]] = lettersGuessed;
             }
             document.getElementById("current-word").textContent = ("Current word: " + word);
         }
-       
 
-        if (word === currentWord.length){
-            document.getElementById("wins").textContent = wins++;
-
-            reset();
+        if (lettersToGuess === 0){
+            resetLettersGuessed;
+            wins++;
+            document.getElementById("wins").textContent = wins;
         }
+
+    } else {
+        return alert("Invalid key entered. Please try again!");
     }
-    
-    // else {
-    //     return alert("Invalid key entered. Please try again!");
-    // }
 }
 
 
@@ -176,6 +152,6 @@ document.onkeyup = function(event) {
 
         directionsText.textContent = "Press any key to get started!";
         currentWordText.textContent = "Current Word: ";
-        pastGuessesText.textContent = "Letters guessed: " + lettersGuessed;
+        // lettersGuessedText.textContent = "Letters guessed: " + lettersGuessed;
         attemptsRemainingText.textContent = "Attempts remaining " + attemptsRemaining;
         winsText.textContent = "Wins: " + wins;
